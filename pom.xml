@@ -6,7 +6,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
@@ -110,6 +110,7 @@
             <configuration>
               <mainClass>com.github.jinahya.Main</mainClass>
               <attachToBuild>true</attachToBuild>
+              <!-- https://code.google.com/p/onejar-maven-plugin/issues/detail?id=8 -->
               <!--classifier>onejar</classifier-->
               <filename>${project.build.finalName}-onejar.${project.packaging}</filename>
             </configuration>
