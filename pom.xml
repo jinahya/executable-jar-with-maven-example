@@ -5,14 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.jinahya</groupId>
-  <artifactId>executable-jar-with-maven</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>executable-jar-with-maven-example</artifactId>
+  <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <version>4.0-beta4</version>
+      <version>4.0-beta5</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -27,11 +27,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.4</version>
+        <version>2.5.3</version>
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.github.jinahya.Main</mainClass>
+              <mainClass>com.github.jinahya.example.Application</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
@@ -51,13 +51,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
+        <version>2.5</version>
         <configuration>
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
-              <mainClass>com.github.jinahya.Main</mainClass>
+              <mainClass>com.github.jinahya.example.Application</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -65,7 +65,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.8</version>
+        <version>2.10</version>
         <executions>
           <execution>
             <id>copy-dependencies</id>
@@ -87,7 +87,7 @@
           <shadedArtifactAttached>true</shadedArtifactAttached>
           <transformers>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-              <mainClass>com.github.jinahya.Main</mainClass>
+              <mainClass>com.github.jinahya.example.Application</mainClass>
             </transformer>
           </transformers>
         </configuration>
@@ -108,8 +108,9 @@
         <executions>
           <execution>
             <configuration>
-              <mainClass>com.github.jinahya.Main</mainClass>
+              <mainClass>com.github.jinahya.example.Application</mainClass>
               <attachToBuild>true</attachToBuild>
+              <!-- https://code.google.com/p/onejar-maven-plugin/issues/detail?id=8 -->
               <!--classifier>onejar</classifier-->
               <filename>${project.build.finalName}-onejar.${project.packaging}</filename>
             </configuration>
@@ -124,7 +125,7 @@
 
   <!-- More Project Information -->
   <name>${project.artifactId}</name>
-  <description></description>
+  <description>an example for generating executable jars with maven</description>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -136,6 +137,6 @@
 
   <!-- Environment Settings -->
   <prerequisites>
-    <maven>3.2.1</maven>
+    <maven>3.0.5</maven>
   </prerequisites>
 </project>

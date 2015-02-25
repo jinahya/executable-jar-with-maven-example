@@ -15,19 +15,19 @@
  */
 
 
-package com.github.jinahya;
+package com.github.jinahya.example;
 
 
 /**
  *
- * @author Jin Kwon
+ * @author Jin Kwon &lt;jinahya_at_gmail.com&gt;
  */
-public class Main {
+public class Application {
 
 
     public static void main(final String[] args) {
 
-        System.out.printf("hello, world\n");
+        System.out.printf("I'm not gonna do anyting.\n");
     }
 
 
