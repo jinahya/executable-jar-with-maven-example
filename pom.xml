@@ -1,37 +1,116 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- The Basics -->
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <packaging>jar</packaging>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>18.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
+        <version>4.0-beta5</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <scope>runtime</scope>
+    </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <version>4.0-beta5</version>
-      <scope>compile</scope>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.report.outputEncoding>UTF-8</project.report.outputEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.testSource>1.8</maven.compiler.testSource>
+    <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
+    <fully.qualified.main.class>com.github.jinahya.example.Application</fully.qualified.main.class>
   </properties>
 
+  <!-- Build Settings -->
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <!--groupId>org.dstovall</groupId-->
+          <groupId>com.jolira</groupId>
+          <artifactId>onejar-maven-plugin</artifactId>
+          <version>1.4.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.5.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.10</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>2.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>1.2.3.RELEASE</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>com.jolira</groupId>
+        <artifactId>onejar-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <mainClass>${fully.qualified.main.class}</mainClass>
+              <attachToBuild>true</attachToBuild>
+              <!-- https://code.google.com/p/onejar-maven-plugin/issues/detail?id=8 -->
+              <!--classifier>onejar</classifier-->
+              <filename>${project.build.finalName}-onejar.${project.packaging}</filename>
+            </configuration>
+            <goals>
+              <goal>one-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.5.3</version>
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.github.jinahya.example.Application</mainClass>
+              <mainClass>${fully.qualified.main.class}</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
@@ -40,7 +119,6 @@
         </configuration>
         <executions>
           <execution>
-            <id>assembly</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>
@@ -50,25 +128,9 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.5</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
-              <mainClass>com.github.jinahya.example.Application</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.10</version>
         <executions>
           <execution>
-            <id>copy-dependencies</id>
             <phase>package</phase>
             <goals>
               <goal>copy-dependencies</goal>
@@ -81,19 +143,40 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
+              <mainClass>${fully.qualified.main.class}</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <tagNameFormat>@{project.version}</tagNameFormat>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+          <goals>install</goals>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>2.3</version>
         <configuration>
           <shadedArtifactAttached>true</shadedArtifactAttached>
           <transformers>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-              <mainClass>com.github.jinahya.example.Application</mainClass>
+              <mainClass>${fully.qualified.main.class}</mainClass>
             </transformer>
           </transformers>
         </configuration>
         <executions>
           <execution>
-            <id>shade</id>
             <goals>
               <goal>shade</goal>
             </goals>
@@ -101,22 +184,17 @@
         </executions>
       </plugin>
       <plugin>
-        <!--groupId>org.dstovall</groupId-->
-        <groupId>com.jolira</groupId>
-        <artifactId>onejar-maven-plugin</artifactId>
-        <version>1.4.4</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
         <executions>
           <execution>
-            <configuration>
-              <mainClass>com.github.jinahya.example.Application</mainClass>
-              <attachToBuild>true</attachToBuild>
-              <!-- https://code.google.com/p/onejar-maven-plugin/issues/detail?id=8 -->
-              <!--classifier>onejar</classifier-->
-              <filename>${project.build.finalName}-onejar.${project.packaging}</filename>
-            </configuration>
             <goals>
-              <goal>one-jar</goal>
+              <goal>repackage</goal>
             </goals>
+            <configuration>
+              <classifier>spring-boot</classifier>
+              <mainClass>${fully.qualified.main.class}</mainClass>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -136,7 +214,23 @@
   </licenses>
 
   <!-- Environment Settings -->
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/jinahya/${project.artifactId}/issues</url>
+  </issueManagement>
+  <ciManagement />
+  <mailingLists />
+  <scm>
+    <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
+    <url>https://github.com/jinahya/${project.artifactId}</url>
+    <tag>0.1</tag>
+  </scm>
   <prerequisites>
     <maven>3.0.5</maven>
   </prerequisites>
+  <repositories />
+  <pluginRepositories />
+  <distributionManagement />
+  <profiles />
 </project>
