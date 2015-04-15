@@ -216,7 +216,23 @@
   </licenses>
 
   <!-- Environment Settings -->
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/jinahya/${project.artifactId}/issues</url>
+  </issueManagement>
+  <ciManagement/>
+  <mailingLists />
+  <scm>
+    <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
+    <url>https://github.com/jinahya/${project.artifactId}</url>
+    <tag>HEAD</tag>
+  </scm>
   <prerequisites>
     <maven>3.0.5</maven>
   </prerequisites>
+  <repositories />
+  <pluginRepositories />
+  <distributionManagement />
+  <profiles/>
 </project>
