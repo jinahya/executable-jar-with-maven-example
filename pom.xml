@@ -17,7 +17,7 @@
       <dependency>
         <groupId>com.google.inject</groupId>
         <artifactId>guice</artifactId>
-        <version>4.0-beta5</version>
+        <version>4.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -40,7 +40,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.testSource>1.8</maven.compiler.testSource>
     <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
-    <fully.qualified.main.class>com.github.jinahya.example.Application</fully.qualified.main.class>
+    <fully.qualified.main.class>com.github.jinahya.example.Main</fully.qualified.main.class>
   </properties>
 
   <!-- Build Settings -->
@@ -56,7 +56,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.5.3</version>
+          <version>2.5.4</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -71,7 +71,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>2.5.1</version>
+          <version>2.5.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -136,6 +136,7 @@
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
+              <includeScope>runtime</includeScope>
               <outputDirectory>${project.build.directory}/${project.build.finalName}.lib</outputDirectory>
             </configuration>
           </execution>
@@ -149,7 +150,6 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
-              <mainClass>${fully.qualified.main.class}</mainClass>
             </manifest>
           </archive>
         </configuration>

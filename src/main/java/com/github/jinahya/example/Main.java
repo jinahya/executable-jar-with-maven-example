@@ -22,7 +22,7 @@ package com.github.jinahya.example;
  *
  * @author Jin Kwon &lt;jinahya_at_gmail.com&gt;
  */
-public class Application {
+public class Main {
 
 
     static {
