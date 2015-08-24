@@ -5,19 +5,19 @@
   <!-- The Basics -->
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>18.0</version>
+        <version>19.0-rc1</version>
       </dependency>
       <dependency>
         <groupId>com.google.inject</groupId>
         <artifactId>guice</artifactId>
-        <version>4.0-beta5</version>
+        <version>4.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -40,55 +40,18 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.testSource>1.8</maven.compiler.testSource>
     <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
-    <fully.qualified.main.class>com.github.jinahya.example.Application</fully.qualified.main.class>
+    <fully.qualified.main.class>com.github.jinahya.example.Main</fully.qualified.main.class>
   </properties>
 
   <!-- Build Settings -->
   <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <!--groupId>org.dstovall</groupId-->
-          <groupId>com.jolira</groupId>
-          <artifactId>onejar-maven-plugin</artifactId>
-          <version>1.4.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.5.3</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>2.10</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.6</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>2.5.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-shade-plugin</artifactId>
-          <version>2.3</version>
-        </plugin>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>1.2.3.RELEASE</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+    <pluginManagement />
     <plugins>
       <plugin>
+        <!--groupId>org.dstovall</groupId-->
         <groupId>com.jolira</groupId>
         <artifactId>onejar-maven-plugin</artifactId>
+        <version>1.4.4</version>
         <executions>
           <execution>
             <configuration>
@@ -107,6 +70,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.5.5</version>
         <configuration>
           <archive>
             <manifest>
@@ -129,13 +93,15 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.10</version>
         <executions>
           <execution>
-            <phase>package</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
+              <includeScope>runtime</includeScope>
               <outputDirectory>${project.build.directory}/${project.build.finalName}.lib</outputDirectory>
             </configuration>
           </execution>
@@ -144,19 +110,26 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
-              <mainClass>${fully.qualified.main.class}</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <configuration>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                  <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
+                  <mainClass>${fully.qualified.main.class}</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.2</version>
         <configuration>
           <tagNameFormat>@{project.version}</tagNameFormat>
           <pushChanges>false</pushChanges>
@@ -167,6 +140,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.1</version>
         <configuration>
           <shadedArtifactAttached>true</shadedArtifactAttached>
           <transformers>
@@ -186,6 +160,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>1.2.5.RELEASE</version>
         <executions>
           <execution>
             <goals>
@@ -224,11 +199,9 @@
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
     <url>https://github.com/jinahya/${project.artifactId}</url>
-    <tag>0.1</tag>
+    <tag>0.2</tag>
   </scm>
-  <prerequisites>
-    <maven>3.0.5</maven>
-  </prerequisites>
+  <prerequisites />
   <repositories />
   <pluginRepositories />
   <distributionManagement />
