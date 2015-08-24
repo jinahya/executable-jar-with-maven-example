@@ -5,7 +5,7 @@
   <!-- The Basics -->
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
   <dependencyManagement>
     <dependencies>
@@ -45,7 +45,7 @@
 
   <!-- Build Settings -->
   <build>
-    <pluginManagement/>
+    <pluginManagement />
     <plugins>
       <plugin>
         <!--groupId>org.dstovall</groupId-->
@@ -199,9 +199,9 @@
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
     <url>https://github.com/jinahya/${project.artifactId}</url>
-    <tag>HEAD</tag>
+    <tag>0.2</tag>
   </scm>
-  <prerequisites/>
+  <prerequisites />
   <repositories />
   <pluginRepositories />
   <distributionManagement />
