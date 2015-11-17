@@ -5,7 +5,7 @@
   <!-- The Basics -->
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.4-SNAPSHOT</version>
+  <version>0.5-SNAPSHOT</version>
   <packaging>jar</packaging>
   <dependencyManagement />
   <dependencies>
@@ -138,26 +138,26 @@
               <target>
                 <zip destfile="${project.build.directory}/${project.build.finalName}.zip">
                   <zipfileset dir="${project.build.directory}">
-                    <include name="${project.build.finalName}.${project.packaging}"/>
-                    <include name="${project.build.finalName}.lib/*"/>
+                    <include name="${project.build.finalName}.${project.packaging}" />
+                    <include name="${project.build.finalName}.lib/*" />
                   </zipfileset>
                 </zip>
                 <tar destfile="${project.build.directory}/${project.build.finalName}.tar">
                   <tarfileset dir="${project.build.directory}">
-                    <include name="${project.build.finalName}.${project.packaging}"/>
-                    <include name="${project.build.finalName}.lib/*"/>
+                    <include name="${project.build.finalName}.${project.packaging}" />
+                    <include name="${project.build.finalName}.lib/*" />
                   </tarfileset>
                 </tar>
                 <tar destfile="${project.build.directory}/${project.build.finalName}.tgz" compression="gzip">
                   <tarfileset dir="${project.build.directory}">
-                    <include name="${project.build.finalName}.${project.packaging}"/>
-                    <include name="${project.build.finalName}.lib/*"/>
+                    <include name="${project.build.finalName}.${project.packaging}" />
+                    <include name="${project.build.finalName}.lib/*" />
                   </tarfileset>
                 </tar>
                 <tar destfile="${project.build.directory}/${project.build.finalName}.tbz2" compression="bzip2">
                   <tarfileset dir="${project.build.directory}">
-                    <include name="${project.build.finalName}.${project.packaging}"/>
-                    <include name="${project.build.finalName}.lib/*"/>
+                    <include name="${project.build.finalName}.${project.packaging}" />
+                    <include name="${project.build.finalName}.lib/*" />
                   </tarfileset>
                 </tar>
               </target>
