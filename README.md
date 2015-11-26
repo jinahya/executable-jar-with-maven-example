@@ -1,4 +1,4 @@
-executable-jar-with-maven
+executable-jar-with-maven-example
 =========================
 generates executable jar files with dependencies.
 ## just build
