@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -12,7 +10,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.5-SNAPSHOT</version>
+  <version>0.6-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>executable-jar-with-maven-example</name>
@@ -159,16 +157,10 @@
             </goals>
             <configuration>
               <target>
-                <zip basedir="${project.build.directory}"
-                     destfile="${project.build.directory}/${project.build.finalName}.zip"
-                     includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*"/>
-                <tar basedir="${project.build.directory}"
-                     destfile="${project.build.directory}/${project.build.finalName}.tar"
-                     includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*"/>
-                <gzip src="${project.build.directory}/${project.build.finalName}.tar"
-                      destfile="${project.build.directory}/${project.build.finalName}.tar.gz"/>
-                <bzip2 src="${project.build.directory}/${project.build.finalName}.tar"
-                       destfile="${project.build.directory}/${project.build.finalName}.tar.bz2"/>
+                <zip basedir="${project.build.directory}" destfile="${project.build.directory}/${project.build.finalName}.zip" includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
+                <tar basedir="${project.build.directory}" destfile="${project.build.directory}/${project.build.finalName}.tar" includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
+                <gzip src="${project.build.directory}/${project.build.finalName}.tar" destfile="${project.build.directory}/${project.build.finalName}.tar.gz" />
+                <bzip2 src="${project.build.directory}/${project.build.finalName}.tar" destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" />
               </target>
             </configuration>
           </execution>
