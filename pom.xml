@@ -10,7 +10,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.5</version>
+  <version>0.6-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>executable-jar-with-maven-example</name>
@@ -33,7 +33,7 @@
     <connection>scm:git:git@github.com:jinahya/executable-jar-with-maven-example.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/executable-jar-with-maven-example.git</developerConnection>
     <url>https://github.com/jinahya/executable-jar-with-maven-example</url>
-    <tag>0.5</tag>
+    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>GitHub Issues</system>
