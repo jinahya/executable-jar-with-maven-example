@@ -7,7 +7,7 @@ generates executable jar files with dependencies.
 ~~~
 $ mvn clean package
 ~~~
-## and see
+## and see what you got
 ~~~
 $ ls -l target
 ~~~
