@@ -147,10 +147,13 @@
                 </goals>
                 <configuration>
                   <target>
-                    <zip basedir="${project.build.directory}" destfile="${project.build.directory}/${project.build.finalName}.zip" includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
-                    <tar basedir="${project.build.directory}" destfile="${project.build.directory}/${project.build.finalName}.tar" includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
-                    <gzip src="${project.build.directory}/${project.build.finalName}.tar" destfile="${project.build.directory}/${project.build.finalName}.tar.gz" />
-                    <bzip2 src="${project.build.directory}/${project.build.finalName}.tar" destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" />
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}"/>
+                    <property name="archive.includes" value="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*"/>
+                    <property name="tar.destfile" value="${final.name}.tar"/>
+                    <zip basedir="${project.build.directory}" destfile="${final.name}.zip" includes="${archive.includes}" />
+                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
+                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
+                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
                   </target>
                 </configuration>
               </execution>
