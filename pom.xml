@@ -10,7 +10,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.6.0-SNAPSHOT</version>
+  <version>0.6.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -147,16 +147,10 @@
                 </goals>
                 <configuration>
                   <target>
-                    <zip basedir="${project.build.directory}"
-                         destfile="${project.build.directory}/${project.build.finalName}.zip"
-                         includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
-                    <tar basedir="${project.build.directory}"
-                         destfile="${project.build.directory}/${project.build.finalName}.tar"
-                         includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
-                    <gzip src="${project.build.directory}/${project.build.finalName}.tar"
-                          destfile="${project.build.directory}/${project.build.finalName}.tar.gz" />
-                    <bzip2 src="${project.build.directory}/${project.build.finalName}.tar"
-                           destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" />
+                    <zip basedir="${project.build.directory}" destfile="${project.build.directory}/${project.build.finalName}.zip" includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
+                    <tar basedir="${project.build.directory}" destfile="${project.build.directory}/${project.build.finalName}.tar" includes="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
+                    <gzip src="${project.build.directory}/${project.build.finalName}.tar" destfile="${project.build.directory}/${project.build.finalName}.tar.gz" />
+                    <bzip2 src="${project.build.directory}/${project.build.finalName}.tar" destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" />
                   </target>
                 </configuration>
               </execution>
