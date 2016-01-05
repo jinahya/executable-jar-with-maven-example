@@ -25,19 +25,12 @@ package com.github.jinahya.example;
 public class Main {
 
 
-    static {
-
-        System.out.printf("I'm not gonna do anyting.\n");
-    }
-
-
     public static void main(final String[] args) throws ClassNotFoundException {
 
-        Class.forName("com.google.common.io.BaseEncoding"); // guava
+        System.out.println(Class.forName("com.google.common.io.BaseEncoding"));
 
-        Class.forName("com.google.inject.Injector"); // guice
+        System.out.println(Class.forName("com.google.inject.Injector"));
     }
-
 
 }
 
