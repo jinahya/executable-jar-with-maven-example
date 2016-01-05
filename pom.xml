@@ -10,7 +10,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.6.1-SNAPSHOT</version>
+  <version>0.7.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -147,9 +147,9 @@
                 </goals>
                 <configuration>
                   <target>
-                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}"/>
-                    <property name="archive.includes" value="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*"/>
-                    <property name="tar.destfile" value="${final.name}.tar"/>
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
+                    <property name="archive.includes" value="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
+                    <property name="tar.destfile" value="${final.name}.tar" />
                     <zip basedir="${project.build.directory}" destfile="${final.name}.zip" includes="${archive.includes}" />
                     <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
                     <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
