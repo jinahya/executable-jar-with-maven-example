@@ -10,7 +10,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.7.0</version>
+  <version>0.7.1</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -21,7 +21,7 @@
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
     <url>https://github.com/jinahya/${project.artifactId}</url>
-    <tag>0.7.0</tag>
+    <tag>0.7.1</tag>
   </scm>
   <issueManagement>
     <system>GitHub Issues</system>
@@ -92,77 +92,6 @@
       </build>
     </profile>
     <profile>
-      <id>manual</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <version>2.10</version>
-            <executions>
-              <execution>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>copy-dependencies</goal>
-                </goals>
-                <configuration>
-                  <includeScope>runtime</includeScope>
-                  <outputDirectory>${project.build.directory}/${project.build.finalName}.lib</outputDirectory>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>2.6</version>
-            <executions>
-              <execution>
-                <id>default-jar</id>
-                <configuration>
-                  <archive>
-                    <manifest>
-                      <addClasspath>true</addClasspath>
-                      <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
-                      <mainClass>${fully.qualified.main.class}</mainClass>
-                    </manifest>
-                  </archive>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.8</version>
-            <executions>
-              <execution>
-                <id>antrun-archive</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                <configuration>
-                  <target>
-                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
-                    <property name="archive.includes" value="${project.build.finalName}.${project.packaging} ${project.build.finalName}.lib/*" />
-                    <property name="tar.destfile" value="${final.name}.tar" />
-                    <zip basedir="${project.build.directory}" destfile="${final.name}.zip" includes="${archive.includes}" />
-                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
-                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
-                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
-                  </target>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>onejar</id>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -202,7 +131,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
-            <version>2.4.2</version>
+            <version>2.4.3</version>
             <executions>
               <execution>
                 <goals>
@@ -241,6 +170,82 @@
                 <configuration>
                   <classifier>spring-boot</classifier>
                   <mainClass>${fully.qualified.main.class}</mainClass>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>manual</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.10</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <phase>prepare-package</phase>
+                <configuration>
+                  <includeScope>runtime</includeScope>
+                  <outputDirectory>${project.build.directory}/${project.build.finalName}.cp.lib</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>2.6</version>
+            <executions>
+              <execution>
+                <id>cp-jar</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <phase>prepare-package</phase>
+                <configuration>
+                  <archive>
+                    <manifest>
+                      <addClasspath>true</addClasspath>
+                      <classpathPrefix>${project.build.finalName}.cp.lib/</classpathPrefix>
+                      <mainClass>${fully.qualified.main.class}</mainClass>
+                    </manifest>
+                  </archive>
+                  <finalName>${project.build.finalName}.cp</finalName>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+              <execution>
+                <id>antrun-archive</id>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <target>
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
+                    <property name="archive.includes" value="${project.build.finalName}.cp.${project.packaging} ${project.build.finalName}.cp.lib/*" />
+                    <property name="tar.destfile" value="${final.name}.tar" />
+                    <zip basedir="${project.build.directory}" destfile="${final.name}.zip" includes="${archive.includes}" />
+                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
+                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
+                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
+                  </target>
                 </configuration>
               </execution>
             </executions>
