@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/jinahya/executable-jar-with-maven-example.svg?branch=develop)](https://travis-ci.org/jinahya/executable-jar-with-maven-example)
 
 generates executable jar files with dependencies.
-## just build
+## just build it
 ~~~
 $ mvn clean package
 ~~~
