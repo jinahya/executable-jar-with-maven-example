@@ -10,7 +10,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.7.4</version>
+  <version>0.7.5-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -21,7 +21,7 @@
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
     <url>https://github.com/jinahya/${project.artifactId}</url>
-    <tag>0.7.4</tag>
+    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>GitHub Issues</system>
