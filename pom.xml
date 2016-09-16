@@ -197,7 +197,7 @@
                 <phase>prepare-package</phase>
                 <configuration>
                   <includeScope>runtime</includeScope>
-                  <outputDirectory>${project.build.directory}/${project.build.finalName}.cp.lib</outputDirectory>
+                  <outputDirectory>${project.build.directory}/${project.build.finalName}-manual.lib</outputDirectory>
                 </configuration>
               </execution>
             </executions>
@@ -205,29 +205,23 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
-            <!--<version>3.0.2</version>-->
-            <version>2.6</version>
+            <version>3.0.2</version>
             <executions>
-              <!--              <execution>
-                <id>default-jar</id>
-                <phase>skip</phase>
-              </execution>-->
               <execution>
-                <id>cp-jar</id>
-                <!--<id>default-jar</id>-->
+                <id>manual-jar</id>
                 <goals>
                   <goal>jar</goal>
                 </goals>
                 <phase>prepare-package</phase>
                 <configuration>
+                  <classifier>manual</classifier>
                   <archive>
                     <manifest>
                       <addClasspath>true</addClasspath>
-                      <classpathPrefix>${project.build.finalName}.cp.lib/</classpathPrefix>
+                      <classpathPrefix>${project.build.finalName}-manual.lib/</classpathPrefix>
                       <mainClass>${mainClass}</mainClass>
                     </manifest>
                   </archive>
-                  <finalName>${project.build.finalName}.cp</finalName>
                 </configuration>
               </execution>
             </executions>
@@ -246,7 +240,7 @@
                 <configuration>
                   <target>
                     <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
-                    <property name="archive.includes" value="${project.build.finalName}.cp.${project.packaging} ${project.build.finalName}.cp.lib/*" />
+                    <property name="archive.includes" value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*" />
                     <property name="tar.destfile" value="${final.name}.tar" />
                     <zip basedir="${project.build.directory}" destfile="${final.name}.zip" includes="${archive.includes}" />
                     <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
