@@ -46,7 +46,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>19.0</version>
+      <version>21.0</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -68,7 +68,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.6</version>
+            <version>3.0.0</version>
             <configuration>
               <archive>
                 <manifest>
@@ -132,7 +132,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
-            <version>2.4.3</version>
+            <version>3.0.0</version>
             <executions>
               <execution>
                 <goals>
@@ -188,7 +188,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
-            <version>2.10</version>
+            <version>3.0.0</version>
             <executions>
               <execution>
                 <goals>
