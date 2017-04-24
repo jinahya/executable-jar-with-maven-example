@@ -13,24 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
 package com.github.jinahya.example;
 
-
 /**
+ * A main class.
  *
  * @author Jin Kwon &lt;jinahya_at_gmail.com&gt;
  */
 public class Main {
 
-
     public static void main(final String[] args) throws ClassNotFoundException {
-
         System.out.println(Class.forName("com.google.common.io.BaseEncoding"));
-
         System.out.println(Class.forName("com.google.inject.Injector"));
     }
-
 }
-
