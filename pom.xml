@@ -7,10 +7,6 @@
     <artifactId>jinahya-parent</artifactId>
     <version>0.7.6</version>
   </parent>
-  
-  <prerequisites>
-    <maven>3.3.9</maven>
-  </prerequisites>
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
@@ -20,6 +16,10 @@
   <name>${project.artifactId}</name>
   <description>an example for generating executable jars with maven</description>
   <url>https://github.com/jinahya/${project.artifactId}</url>
+
+  <prerequisites>
+    <maven>3.3.9</maven>
+  </prerequisites>
 
   <scm>
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
@@ -102,8 +102,7 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <!--groupId>org.dstovall</groupId-->
+          <plugin><!--groupId>org.dstovall</groupId-->
             <groupId>com.jolira</groupId>
             <artifactId>onejar-maven-plugin</artifactId>
             <version>1.4.4</version>
