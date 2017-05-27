@@ -31,12 +31,6 @@
     <system>GitHub Issues</system>
     <url>https://github.com/jinahya/${project.artifactId}/issues</url>
   </issueManagement>
-  <distributionManagement>
-    <site>
-      <id>jinahy.github.io</id>
-      <url>http://jinahya.github.io/${project.artifactId}/sites/${project.version}</url>
-    </site>
-  </distributionManagement>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -50,7 +44,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>21.0</version>
+      <version>22.0</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
