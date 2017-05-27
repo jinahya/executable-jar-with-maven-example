@@ -10,7 +10,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.8.2</version>
+  <version>0.8.3</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -25,18 +25,12 @@
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
     <url>https://github.com/jinahya/${project.artifactId}</url>
-    <tag>0.8.2</tag>
+    <tag>0.8.3</tag>
   </scm>
   <issueManagement>
     <system>GitHub Issues</system>
     <url>https://github.com/jinahya/${project.artifactId}/issues</url>
   </issueManagement>
-  <distributionManagement>
-    <site>
-      <id>jinahy.github.io</id>
-      <url>http://jinahya.github.io/${project.artifactId}/sites/${project.version}</url>
-    </site>
-  </distributionManagement>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -50,7 +44,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>21.0</version>
+      <version>22.0</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -244,8 +238,8 @@
                   <target>
                     <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
                     <property name="archive.includes" value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*" />
-                    <property name="tar.destfile" value="${final.name}.tar" />
-                    <zip basedir="${project.build.directory}" destfile="${final.name}.zip" includes="${archive.includes}" />
+                    <property name="tar.destfile" value="${final.name}-manual.tar" />
+                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip" includes="${archive.includes}" />
                     <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
                     <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
                     <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
