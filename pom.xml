@@ -17,9 +17,11 @@
   <description>an example for generating executable jars with maven</description>
   <url>https://github.com/jinahya/${project.artifactId}</url>
 
+  <!--
   <prerequisites>
-    <maven>3.3.9</maven>
+  <maven>3.3.9</maven>
   </prerequisites>
+  -->
 
   <scm>
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
@@ -44,7 +46,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>22.0</version>
+      <version>23.0</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
