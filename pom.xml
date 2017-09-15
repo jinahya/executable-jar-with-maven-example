@@ -17,12 +17,6 @@
   <description>an example for generating executable jars with maven</description>
   <url>https://github.com/jinahya/${project.artifactId}</url>
 
-  <!--
-  <prerequisites>
-  <maven>3.3.9</maven>
-  </prerequisites>
-  -->
-
   <scm>
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
@@ -59,7 +53,7 @@
 
   <profiles>
     <profile>
-      <id>assembly</id>
+      <id>jar-with-dependencies</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -173,6 +167,57 @@
                 </configuration>
               </execution>
             </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile> 
+    <profile>
+      <id>swarm</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>wildfly-swarm-plugin</artifactId>
+            <version>2017.9.5</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>package</goal>
+                </goals>
+                <configuration>
+                  <!--<hollow>true</hollow>-->
+                  <mainClass>${mainClass}</mainClass>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile> 
+    <profile>
+      <id>microbundle</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>fish.payara.maven.plugins</groupId>
+            <artifactId>payara-micro-maven-plugin</artifactId>
+            <version>1.0.0</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>bundle</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <startClass>${mainClass}</startClass>
+            </configuration>
           </plugin>
         </plugins>
       </build>
