@@ -211,12 +211,13 @@
             <executions>
               <execution>
                 <goals>
-                  <goal>bundle</goal>
+                  <!--<goal>bundle</goal>-->
                 </goals>
               </execution>
             </executions>
             <configuration>
-              <startClass>${mainClass}</startClass>
+              <useUberJar>true</useUberJar>
+              <!--<startClass>${mainClass}</startClass>-->
             </configuration>
           </plugin>
         </plugins>
