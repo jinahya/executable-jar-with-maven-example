@@ -181,7 +181,7 @@
           <plugin>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>wildfly-swarm-plugin</artifactId>
-            <version>2017.9.5</version>
+            <version>2017.12.1</version>
             <executions>
               <execution>
                 <goals>
@@ -217,7 +217,7 @@
             </executions>
             <configuration>
               <useUberJar>true</useUberJar>
-              <!--<startClass>${mainClass}</startClass>-->
+              <startClass>${mainClass}</startClass>
             </configuration>
           </plugin>
         </plugins>
