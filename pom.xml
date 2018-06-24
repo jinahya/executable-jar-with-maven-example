@@ -5,12 +5,12 @@
   <parent>
     <groupId>com.github.jinahya</groupId>
     <artifactId>jinahya-parent</artifactId>
-    <version>0.7.6</version>
+    <version>0.7.8</version>
   </parent>
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.8.3</version>
+  <version>0.8.4</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -18,14 +18,14 @@
   <url>https://github.com/jinahya/${project.artifactId}</url>
 
   <prerequisites>
-    <maven>3.3.9</maven>
+    <maven>3.5.3</maven>
   </prerequisites>
 
   <scm>
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
     <url>https://github.com/jinahya/${project.artifactId}</url>
-    <tag>0.8.3</tag>
+    <tag>0.8.4</tag>
   </scm>
   <issueManagement>
     <system>GitHub Issues</system>
@@ -44,20 +44,72 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>22.0</version>
+      <version>25.1-jre</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <version>4.1.0</version>
+      <version>4.2.0</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
 
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin><!--groupId>org.dstovall</groupId-->
+          <groupId>com.jolira</groupId>
+          <artifactId>onejar-maven-plugin</artifactId>
+          <version>1.4.4</version>
+        </plugin>
+        <plugin>
+          <groupId>fish.payara.maven.plugins</groupId>
+          <artifactId>payara-micro-maven-plugin</artifactId>
+          <version>1.0.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>1.5.9.RELEASE</version>
+        </plugin>
+        <plugin>
+          <groupId>org.wildfly.swarm</groupId>
+          <artifactId>wildfly-swarm-plugin</artifactId>
+          <version>2017.12.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
   <profiles>
     <profile>
-      <id>assembly</id>
+      <id>jar-with-dependencies</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -66,7 +118,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.0.0</version>
             <configuration>
               <archive>
                 <manifest>
@@ -99,7 +150,6 @@
           <plugin><!--groupId>org.dstovall</groupId-->
             <groupId>com.jolira</groupId>
             <artifactId>onejar-maven-plugin</artifactId>
-            <version>1.4.4</version>
             <executions>
               <execution>
                 <phase>package</phase>
@@ -129,7 +179,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
-            <version>3.0.0</version>
             <executions>
               <execution>
                 <goals>
@@ -159,7 +208,6 @@
           <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
-            <version>1.5.3.RELEASE</version>
             <executions>
               <execution>
                 <goals>
@@ -174,6 +222,56 @@
           </plugin>
         </plugins>
       </build>
+    </profile> 
+    <profile>
+      <id>wildfly-swarm</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>wildfly-swarm-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>package</goal>
+                </goals>
+                <configuration>
+                  <!--<hollow>true</hollow>-->
+                  <mainClass>${mainClass}</mainClass>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile> 
+    <profile>
+      <id>payara-micro</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>fish.payara.maven.plugins</groupId>
+            <artifactId>payara-micro-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <!--goal>bundle</goal-->
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <useUberJar>true</useUberJar>
+              <startClass>${mainClass}</startClass>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
     <profile>
       <id>manual</id>
@@ -185,7 +283,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
-            <version>3.0.0</version>
             <executions>
               <execution>
                 <goals>
@@ -202,7 +299,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
-            <version>3.0.2</version>
             <executions>
               <execution>
                 <id>manual-jar</id>
@@ -226,7 +322,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.8</version>
             <executions>
               <execution>
                 <id>antrun-archive</id>
