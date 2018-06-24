@@ -17,6 +17,10 @@
   <description>an example for generating executable jars with maven</description>
   <url>https://github.com/jinahya/${project.artifactId}</url>
 
+  <prerequisites>
+    <maven>3.5.3</maven>
+  </prerequisites>
+
   <scm>
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
@@ -40,13 +44,13 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>23.6-jre</version>
+      <version>25.1-jre</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <version>4.1.0</version>
+      <version>4.2.0</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
@@ -62,7 +66,7 @@
         <plugin>
           <groupId>fish.payara.maven.plugins</groupId>
           <artifactId>payara-micro-maven-plugin</artifactId>
-          <version>1.0.0</version>
+          <version>1.0.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -220,7 +224,7 @@
       </build>
     </profile> 
     <profile>
-      <id>swarm</id>
+      <id>wildfly-swarm</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -245,7 +249,7 @@
       </build>
     </profile> 
     <profile>
-      <id>microbundle</id>
+      <id>payara-micro</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -257,7 +261,7 @@
             <executions>
               <execution>
                 <goals>
-                  <!--<goal>bundle</goal>-->
+                  <!--goal>bundle</goal-->
                 </goals>
               </execution>
             </executions>
