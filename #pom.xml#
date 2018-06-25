@@ -18,7 +18,7 @@
   <url>https://github.com/jinahya/${project.artifactId}</url>
 
   <prerequisites>
-    <maven>3.0</maven>
+    <maven>3.5.3</maven>
   </prerequisites>
 
   <scm>
@@ -64,6 +64,11 @@
           <version>1.4.4</version>
         </plugin>
         <plugin>
+          <groupId>fish.payara.maven.plugins</groupId>
+          <artifactId>payara-micro-maven-plugin</artifactId>
+          <version>1.0.1</version>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
           <version>1.8</version>
@@ -92,6 +97,11 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>1.5.9.RELEASE</version>
+        </plugin>
+        <plugin>
+          <groupId>org.wildfly.swarm</groupId>
+          <artifactId>wildfly-swarm-plugin</artifactId>
+          <version>2017.12.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -213,46 +223,6 @@
         </plugins>
       </build>
     </profile> 
-    <profile>
-      <id>manual</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>copy-dependencies</goal>
-                </goals>
-                <phase>prepare-package</phase>
-                <configuration>
-                  <includeScope>runtime</includeScope>
-                  <outputDirectory>${project.build.directory}/${project.build.finalName}-manual.lib</outputDirectory>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>manual-jar</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-                <phase>prepare-package</phase>
-                <configuration>
-                  <classifier>manual</classifier>
-                  <archive>
-                    <manifest>
-                      <addClasspath>true</addClasspath>
-                      <classpathPrefix>${project.build.finalName}-manual.lib/</classpathPrefix>
-                      <mainClass>${mainClass}</mainClass>
                     </manifest>
                   </archive>
                 </configuration>
