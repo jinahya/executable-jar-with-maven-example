@@ -1,15 +1,15 @@
 # executable-jar-with-maven-example
 
-[![Dependency Status](https://www.versioneye.com/user/projects/59a80bbf6725bd00430af5af/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/59a80bbf6725bd00430af5af)
+![Travis branch](https://travis-ci.org/jinahya/executable-jar-with-maven-example.svg?branch=develop)
 
-generates executable jar files with dependencies.
+Generates executable jar files with dependencies.
 
-## just build it
+## Just build it
 ```
 $ mvn clean package
 ```
 
-## and see what you got
+## And see what you got
 ```
 $ ls -l target
 ```
