@@ -4,12 +4,12 @@
 
 Generates executable jar files with dependencies.
 
-## Just build it
+## Just build it!
 ```
 $ mvn clean package
 ```
 
-## And see what you got
+## And see what you got!
 ```
 $ ls -l target
 ```
