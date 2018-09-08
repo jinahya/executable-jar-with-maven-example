@@ -18,7 +18,7 @@
   <url>https://github.com/jinahya/${project.artifactId}</url>
 
   <prerequisites>
-    <maven>3.5.3</maven>
+    <maven>3.0.4</maven>
   </prerequisites>
 
   <scm>
