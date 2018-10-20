@@ -22,6 +22,12 @@ package com.github.jinahya.example;
  */
 public class Main {
 
+    /**
+     * A main method.
+     *
+     * @param args command line arguments
+     * @throws ClassNotFoundException if referred classes in dependencies is not found.
+     */
     public static void main(final String[] args) throws ClassNotFoundException {
         System.out.println(Class.forName("com.google.common.io.BaseEncoding"));
         System.out.println(Class.forName("com.google.inject.Injector"));
