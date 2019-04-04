@@ -16,17 +16,17 @@
 package com.github.jinahya.example;
 
 /**
- * A main class.
+ * Just a main class.
  *
  * @author Jin Kwon &lt;jinahya_at_gmail.com&gt;
  */
 public class Main {
 
     /**
-     * A main method.
+     * A main method of this program which finds two classes and prints their names from guava and guice, respectively.
      *
-     * @param args command line arguments
-     * @throws ClassNotFoundException if referred classes in dependencies is not found.
+     * @param args command line arguments.
+     * @throws ClassNotFoundException if target classes in dependencies are not found.
      */
     public static void main(final String[] args) throws ClassNotFoundException {
         System.out.println(Class.forName("com.google.common.io.BaseEncoding"));
