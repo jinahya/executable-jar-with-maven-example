@@ -11,5 +11,5 @@ $ mvn clean package
 
 ## And see what you got!
 ```
-$ ls -l target
+$ ls -1 target
 ```
