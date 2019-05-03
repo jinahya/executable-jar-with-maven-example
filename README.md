@@ -1,6 +1,6 @@
 # executable-jar-with-maven-example
 
-![Travis branch](https://travis-ci.org/jinahya/executable-jar-with-maven-example.svg?branch=develop)
+[![Build Status](https://travis-ci.org/jinahya/executable-jar-with-maven-example.svg?branch=develop)](https://travis-ci.org/jinahya/executable-jar-with-maven-example)
 
 Generates executable jar files with dependencies.
 
@@ -11,5 +11,5 @@ $ mvn clean package
 
 ## And see what you got!
 ```
-$ ls -l target
+$ ls -1 target
 ```
