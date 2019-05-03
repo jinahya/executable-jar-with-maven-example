@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.github.jinahya</groupId>
     <artifactId>jinahya-parent</artifactId>
-    <version>0.8.0</version>
+    <version>0.8.3</version>
   </parent>
 
   <groupId>com.github.jinahya</groupId>
