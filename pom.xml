@@ -5,10 +5,9 @@
   <parent>
     <groupId>com.github.jinahya</groupId>
     <artifactId>jinahya-parent</artifactId>
-    <version>0.8.3</version>
+    <version>0.8.4</version>
   </parent>
 
-  <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
   <version>0.8.8-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -16,10 +15,6 @@
   <name>${project.artifactId}</name>
   <description>an example for generating executable jars with maven</description>
   <url>https://github.com/jinahya/${project.artifactId}</url>
-
-  <prerequisites>
-    <maven>3.0.5</maven>
-  </prerequisites>
 
   <scm>
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
@@ -44,7 +39,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>27.1-jre</version>
+      <version>28.0-jre</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -81,7 +76,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.1.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -96,10 +91,57 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>2.1.4.RELEASE</version>
+          <version>2.1.6.RELEASE</version>
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.0.0-M2</version>
+        <executions>
+          <execution>
+            <id>enforce-dependency-convergence</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <skip>true</skip>
+              <rules>
+                <dependencyConvergence/>
+              </rules>
+            </configuration>
+          </execution>
+          <execution>
+            <id>enforce-require-java-version-to-[1.8.0,)</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[1.8.0,)</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+          <execution>
+            <id>enforce-require-maven-version-to-[3.3.9,)</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>[3.3.9,)</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
   <profiles>
@@ -276,13 +318,16 @@
                 <phase>package</phase>
                 <configuration>
                   <target>
-                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
-                    <property name="archive.includes" value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*" />
-                    <property name="tar.destfile" value="${final.name}-manual.tar" />
-                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip" includes="${archive.includes}" />
-                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
-                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
-                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}"/>
+                    <property name="archive.includes"
+                              value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*"/>
+                    <property name="tar.destfile" value="${final.name}-manual.tar"/>
+                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip"
+                         includes="${archive.includes}"/>
+                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}"
+                         includes="${archive.includes}"/>
+                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz"/>
+                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2"/>
                   </target>
                 </configuration>
               </execution>
