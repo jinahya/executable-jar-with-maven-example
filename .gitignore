@@ -1,4 +1,5 @@
 
+
 # Created by https://www.gitignore.io/api/maven
 # Edit at https://www.gitignore.io/?templates=maven
 
@@ -15,6 +16,7 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 # End of https://www.gitignore.io/api/maven
+
 
 .idea/
 !.idea/codeStyles
