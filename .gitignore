@@ -22,3 +22,5 @@ buildNumber.properties
 !.idea/codeStyles
 *.iml
 *.ipr
+
+*~
