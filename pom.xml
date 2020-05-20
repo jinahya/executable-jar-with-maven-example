@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -39,13 +40,13 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>28.1-jre</version>
+      <version>29.0-jre</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <version>4.2.2</version>
+      <version>4.2.3</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
@@ -61,27 +62,27 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.8</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.3.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.1.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
           <version>3.1.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>3.2.1</version>
+          <version>3.2.3</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -96,7 +97,7 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>2.1.7.RELEASE</version>
+          <version>2.3.0.RELEASE</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -104,7 +105,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.0.0-M2</version>
+        <version>3.0.0-M3</version>
         <executions>
           <execution>
             <id>enforce-dependency-convergence</id>
@@ -114,7 +115,7 @@
             <configuration>
               <skip>true</skip>
               <rules>
-                <dependencyConvergence />
+                <dependencyConvergence/>
               </rules>
             </configuration>
           </execution>
@@ -324,13 +325,16 @@
                 <phase>package</phase>
                 <configuration>
                   <target>
-                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
-                    <property name="archive.includes" value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*" />
-                    <property name="tar.destfile" value="${final.name}-manual.tar" />
-                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip" includes="${archive.includes}" />
-                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
-                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
-                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}"/>
+                    <property name="archive.includes"
+                              value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*"/>
+                    <property name="tar.destfile" value="${final.name}-manual.tar"/>
+                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip"
+                         includes="${archive.includes}"/>
+                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}"
+                         includes="${archive.includes}"/>
+                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz"/>
+                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2"/>
                   </target>
                 </configuration>
               </execution>
