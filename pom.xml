@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>com.github.jinahya</groupId>
     <artifactId>jinahya-parent</artifactId>
-    <version>0.8.4</version>
+    <version>0.8.6</version>
   </parent>
 
   <artifactId>executable-jar-with-maven-example</artifactId>
@@ -13,7 +14,7 @@
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
-  <description>an example for generating executable jars with maven</description>
+  <description>An example for generating executable jar files with dependencies</description>
   <url>https://github.com/jinahya/${project.artifactId}</url>
 
   <scm>
@@ -114,7 +115,7 @@
             <configuration>
               <skip>true</skip>
               <rules>
-                <dependencyConvergence />
+                <dependencyConvergence/>
               </rules>
             </configuration>
           </execution>
@@ -324,13 +325,16 @@
                 <phase>package</phase>
                 <configuration>
                   <target>
-                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
-                    <property name="archive.includes" value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*" />
-                    <property name="tar.destfile" value="${final.name}-manual.tar" />
-                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip" includes="${archive.includes}" />
-                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
-                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
-                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}"/>
+                    <property name="archive.includes"
+                              value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*"/>
+                    <property name="tar.destfile" value="${final.name}-manual.tar"/>
+                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip"
+                         includes="${archive.includes}"/>
+                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}"
+                         includes="${archive.includes}"/>
+                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz"/>
+                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2"/>
                   </target>
                 </configuration>
               </execution>
