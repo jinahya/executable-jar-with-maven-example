@@ -57,11 +57,6 @@
           <version>1.4.4</version>
         </plugin>
         <plugin>
-          <groupId>io.quarkus</groupId>
-          <artifactId>quarkus-maven-plugin</artifactId>
-          <version>1.12.1.Final</version>
-        </plugin>
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
           <version>3.1.0</version>
@@ -347,16 +342,36 @@
     </profile>
     <profile>
       <id>quarkus</id>
+      <activation>
+        <!--        <activeByDefault>true</activeByDefault>-->
+      </activation>
+      <properties>
+        <version.io.quarkus.platform>2.12.0.Final</version.io.quarkus.platform>
+        <!--        <version.io.quarkus>${version.io.quarkus.platform}</version.io.quarkus>-->
+      </properties>
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>io.quarkus.platform</groupId>
+            <artifactId>quarkus-bom</artifactId>
+            <version>${version.io.quarkus.platform}</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
       <build>
         <plugins>
           <plugin>
-            <groupId>io.quarkus</groupId>
+            <groupId>io.quarkus.platform</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
+            <!--            <version>${version.io.quarkus.platform}</version>-->
+                        <extensions>true</extensions>
             <configuration>
               <quarkus.native.container-build>false</quarkus.native.container-build>
               <quarkus.package.type>uber-jar</quarkus.package.type>
               <quarkus.package.main-class>${mainClass}</quarkus.package.main-class>
-              <quarkus.native.builder-image>test</quarkus.native.builder-image>
+              <!--              <quarkus.native.builder-image>test</quarkus.native.builder-image>-->
             </configuration>
             <executions>
               <execution>
