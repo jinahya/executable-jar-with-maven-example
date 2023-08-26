@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +15,8 @@
 
   <scm>
     <connection>scm:git:git@github.com:jinahya/${project.artifactId}.git</connection>
-    <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git
+    </developerConnection>
     <url>https://github.com/jinahya/${project.artifactId}</url>
     <tag>HEAD</tag>
   </scm>
@@ -25,7 +27,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+    <project.reporting.outputEncoding>${project.build.sourceEncoding}
+    </project.reporting.outputEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
     <maven.compiler.testSource>${maven.compiler.source}</maven.compiler.testSource>
@@ -227,7 +230,8 @@
                 <configuration>
                   <shadedArtifactAttached>true</shadedArtifactAttached>
                   <transformers>
-                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <transformer
+                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                       <mainClass>${mainClass}</mainClass>
                     </transformer>
                   </transformers>
@@ -322,7 +326,8 @@
                 <phase>package</phase>
                 <configuration>
                   <target>
-                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}"/>
+                    <property name="final.name"
+                              value="${project.build.directory}/${project.build.finalName}"/>
                     <property name="archive.includes"
                               value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*"/>
                     <property name="tar.destfile" value="${final.name}-manual.tar"/>
@@ -343,11 +348,10 @@
     <profile>
       <id>quarkus</id>
       <activation>
-        <!--        <activeByDefault>true</activeByDefault>-->
+        <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <version.io.quarkus.platform>2.12.0.Final</version.io.quarkus.platform>
-        <!--        <version.io.quarkus>${version.io.quarkus.platform}</version.io.quarkus>-->
+        <version.io.quarkus.platform>3.3.0</version.io.quarkus.platform>
       </properties>
       <dependencyManagement>
         <dependencies>
@@ -362,27 +366,30 @@
       </dependencyManagement>
       <build>
         <plugins>
-          <plugin>
-            <groupId>io.quarkus.platform</groupId>
-            <artifactId>quarkus-maven-plugin</artifactId>
-            <!--            <version>${version.io.quarkus.platform}</version>-->
-                        <extensions>true</extensions>
-            <configuration>
-              <quarkus.native.container-build>false</quarkus.native.container-build>
-              <quarkus.package.type>uber-jar</quarkus.package.type>
-              <quarkus.package.main-class>${mainClass}</quarkus.package.main-class>
-              <!--              <quarkus.native.builder-image>test</quarkus.native.builder-image>-->
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>build</goal>
-<!--                  <goal>generate-code</goal>-->
-<!--                  <goal>generate-code-tests</goal>-->
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+<plugin>
+  <groupId>io.quarkus.platform</groupId>
+  <artifactId>quarkus-maven-plugin</artifactId>
+  <extensions>true</extensions>
+  <configuration>
+    <skipOriginalJarRename>true</skipOriginalJarRename> <!-- keep the original jar without .origin -->
+    <properties>
+      <quarkus.native.container-build>false</quarkus.native.container-build>
+      <quarkus.package.type>uber-jar</quarkus.package.type>
+      <quarkus.package.main-class>${mainClass}</quarkus.package.main-class>
+      <quarkus.package.output-directory>${project.build.directory}</quarkus.package.output-directory>
+      <quarkus.package.runner-suffix>-quarkus</quarkus.package.runner-suffix>
+    </properties>
+  </configuration>
+  <executions>
+    <execution>
+      <id>uber-jar</id>
+      <phase>package</phase>
+      <goals>
+        <goal>build</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
         </plugins>
       </build>
     </profile>
