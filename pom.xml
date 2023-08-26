@@ -353,17 +353,17 @@
       <properties>
         <version.io.quarkus.platform>3.3.0</version.io.quarkus.platform>
       </properties>
-<!--      <dependencyManagement>-->
-<!--        <dependencies>-->
-<!--          <dependency>-->
-<!--            <groupId>io.quarkus.platform</groupId>-->
-<!--            <artifactId>quarkus-bom</artifactId>-->
-<!--            <version>${version.io.quarkus.platform}</version>-->
-<!--            <type>pom</type>-->
-<!--            <scope>import</scope>-->
-<!--          </dependency>-->
-<!--        </dependencies>-->
-<!--      </dependencyManagement>-->
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>io.quarkus.platform</groupId>
+            <artifactId>quarkus-bom</artifactId>
+            <version>${version.io.quarkus.platform}</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
       <build>
         <plugins>
           <plugin>
