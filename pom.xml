@@ -366,30 +366,30 @@
       </dependencyManagement>
       <build>
         <plugins>
-<plugin>
-  <groupId>io.quarkus.platform</groupId>
-  <artifactId>quarkus-maven-plugin</artifactId>
-  <extensions>true</extensions>
-  <configuration>
-    <skipOriginalJarRename>true</skipOriginalJarRename> <!-- keep the original jar without .origin -->
-    <properties>
-      <quarkus.native.container-build>false</quarkus.native.container-build>
-      <quarkus.package.type>uber-jar</quarkus.package.type>
-      <quarkus.package.main-class>${mainClass}</quarkus.package.main-class>
-      <quarkus.package.output-directory>${project.build.directory}</quarkus.package.output-directory>
-      <quarkus.package.runner-suffix>-quarkus</quarkus.package.runner-suffix>
-    </properties>
-  </configuration>
-  <executions>
-    <execution>
-      <id>uber-jar</id>
-      <phase>package</phase>
-      <goals>
-        <goal>build</goal>
-      </goals>
-    </execution>
-  </executions>
-</plugin>
+          <plugin>
+            <groupId>io.quarkus.platform</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <extensions>true</extensions>
+            <configuration>
+              <skipOriginalJarRename>true</skipOriginalJarRename> <!-- keep the original jar without .origin -->
+              <properties>
+                <quarkus.native.container-build>false</quarkus.native.container-build>
+                <quarkus.package.type>uber-jar</quarkus.package.type>
+                <quarkus.package.main-class>${mainClass}</quarkus.package.main-class>
+                <quarkus.package.output-directory>${project.build.directory}</quarkus.package.output-directory>
+                <quarkus.package.runner-suffix>-quarkus</quarkus.package.runner-suffix>
+              </properties>
+            </configuration>
+            <executions>
+              <execution>
+                <id>uber-jar</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
     </profile>
