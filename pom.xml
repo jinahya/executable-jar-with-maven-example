@@ -120,14 +120,15 @@
             </configuration>
           </execution>
           <execution>
-            <id>enforce-require-java-version-to-[11,)</id>
+            <id>enforce-require-java-version-to-[17,)</id>
             <goals>
               <goal>enforce</goal>
             </goals>
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>[11,)</version>
+		  <display>true</display>
+                  <version>[17,)</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
