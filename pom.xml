@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>33.3.0-jre</version>
+      <version>33.3.1-jre</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -99,7 +99,7 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>3.3.3</version>
+          <version>3.3.4</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -363,7 +363,7 @@
       <properties>
         <!--        <version.io.quarkus.platform>3.9.2</version.io.quarkus.platform>-->
         <!-- https://search.maven.org/search?q=g:io.quarkus.platform -->
-        <version.io.quarkus.platform>3.13.3</version.io.quarkus.platform>
+        <version.io.quarkus.platform>3.14.4</version.io.quarkus.platform>
       </properties>
       <dependencyManagement>
         <dependencies>
