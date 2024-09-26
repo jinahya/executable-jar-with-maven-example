@@ -26,10 +26,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
+<!--    <maven.compiler.source>1.8</maven.compiler.source>-->
+    <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+    <maven.compiler.release>${maven.compiler.target}</maven.compiler.release>
     <maven.compiler.testSource>${maven.compiler.source}</maven.compiler.testSource>
     <maven.compiler.testTarget>${maven.compiler.testSource}</maven.compiler.testTarget>
+    <maven.compiler.testRelease>${maven.compiler.testTarget}</maven.compiler.testRelease>
     <mainClass>com.github.jinahya.example.Main</mainClass>
   </properties>
 
@@ -363,7 +366,9 @@
       <properties>
         <!--        <version.io.quarkus.platform>3.9.2</version.io.quarkus.platform>-->
         <!-- https://search.maven.org/search?q=g:io.quarkus.platform -->
-        <version.io.quarkus.platform>3.14.4</version.io.quarkus.platform>
+        <!-- https://github.com/quarkusio/quarkus/issues/43491 -->
+<!--        <version.io.quarkus.platform>3.15.0</version.io.quarkus.platform>-->
+        <version.io.quarkus.platform>3.15.1</version.io.quarkus.platform>
       </properties>
       <dependencyManagement>
         <dependencies>

@@ -4,6 +4,18 @@
 
 Generates executable jar files with dependencies.
 
+## JDK
+
+```commandline
+$ cat pom.xml | egrep '<maven.compiler.' 
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+    <maven.compiler.release>${maven.compiler.target}</maven.compiler.release>
+    <maven.compiler.testSource>${maven.compiler.source}</maven.compiler.testSource>
+    <maven.compiler.testTarget>${maven.compiler.testSource}</maven.compiler.testTarget>
+    <maven.compiler.testRelease>${maven.compiler.testTarget}</maven.compiler.testRelease>
+```
+
 ## Just build it!
 ```
 $ mvn clean package
