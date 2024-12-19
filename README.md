@@ -8,7 +8,7 @@ Generates executable jar files with dependencies.
 
 ```xml
 <!-- $ cat pom.xml | egrep '<maven.compiler.' --> 
-    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
     <maven.compiler.release>${maven.compiler.target}</maven.compiler.release>
     <maven.compiler.testSource>${maven.compiler.source}</maven.compiler.testSource>
