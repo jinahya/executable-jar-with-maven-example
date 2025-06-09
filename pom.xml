@@ -376,7 +376,7 @@
 <!--        <version.io.quarkus.platform>3.15.1</version.io.quarkus.platform>-->
         <!-- https://central.sonatype.com/artifact/io.quarkus.platform/quarkus-maven-plugin -->
         <!--version.io.quarkus.platform>3.17.4</version.io.quarkus.platform-->
-        <version.io.quarkus.platform>3.23.0</version.io.quarkus.platform>
+        <version.io.quarkus.platform>3.23.2</version.io.quarkus.platform>
       </properties>
       <dependencyManagement>
         <dependencies>
