@@ -4,7 +4,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.8.10-SNAPSHOT</version>
+  <version>0.8.10</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -16,7 +16,7 @@
     <developerConnection>scm:git:git@github.com:jinahya/${project.artifactId}.git
     </developerConnection>
     <url>https://github.com/jinahya/${project.artifactId}</url>
-    <tag>HEAD</tag>
+    <tag>executable-jar-with-maven-example-0.8.10</tag>
   </scm>
   <issueManagement>
     <system>GitHub Issues</system>
@@ -120,7 +120,7 @@
             <configuration>
               <skip>true</skip>
               <rules>
-                <dependencyConvergence/>
+                <dependencyConvergence />
               </rules>
             </configuration>
           </execution>
@@ -235,8 +235,7 @@
                 <configuration>
                   <shadedArtifactAttached>true</shadedArtifactAttached>
                   <transformers>
-                    <transformer
-                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                       <mainClass>${mainClass}</mainClass>
                     </transformer>
                   </transformers>
@@ -331,17 +330,13 @@
                 <phase>package</phase>
                 <configuration>
                   <target>
-                    <property name="final.name"
-                              value="${project.build.directory}/${project.build.finalName}"/>
-                    <property name="archive.includes"
-                              value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*"/>
-                    <property name="tar.destfile" value="${final.name}-manual.tar"/>
-                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip"
-                         includes="${archive.includes}"/>
-                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}"
-                         includes="${archive.includes}"/>
-                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz"/>
-                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2"/>
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
+                    <property name="archive.includes" value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*" />
+                    <property name="tar.destfile" value="${final.name}-manual.tar" />
+                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip" includes="${archive.includes}" />
+                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
+                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
+                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
                   </target>
                 </configuration>
               </execution>
