@@ -4,7 +4,7 @@
 
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
-  <version>0.9.8</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -125,7 +125,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>enforce-require-java-version-to-[11,)</id>
+            <id>enforce-require-java-version-[11,)</id>
             <goals>
               <goal>enforce</goal>
             </goals>
@@ -138,14 +138,14 @@
             </configuration>
           </execution>
           <execution>
-            <id>enforce-require-maven-version-to-[3.2.5,)</id>
+            <id>enforce-require-maven-version-[3.6.3,)</id>
             <goals>
               <goal>enforce</goal>
             </goals>
             <configuration>
               <rules>
                 <requireMavenVersion>
-                  <version>[3.2.5,)</version>
+                  <version>[3.6.3,)</version>
                 </requireMavenVersion>
               </rules>
             </configuration>
@@ -360,7 +360,7 @@
         <!--version.io.quarkus.platform>3.17.4</version.io.quarkus.platform-->
         <!-- https://central.sonatype.com/artifact/io.quarkus.platform/quarkus-bom/versions -->
 <!--        <version.io.quarkus.platform>3.3.0</version.io.quarkus.platform>-->
-        <version.io.quarkus.platform>3.29.0</version.io.quarkus.platform>
+        <version.io.quarkus.platform>3.29.2</version.io.quarkus.platform>
       </properties>
       <dependencyManagement>
         <dependencies>
