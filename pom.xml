@@ -2,6 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>io.github.jinahya</groupId>
+    <artifactId>jinahya-parent</artifactId>
+    <version>1.0.3</version>
+  </parent>
+
   <groupId>com.github.jinahya</groupId>
   <artifactId>executable-jar-with-maven-example</artifactId>
   <version>1.0.0-SNAPSHOT</version>
@@ -94,7 +100,7 @@
           <artifactId>versions-maven-plugin</artifactId>
           <version>2.19.1</version>
           <configuration>
-<!--            <showVersionless>false</showVersionless>-->
+            <!--            <showVersionless>false</showVersionless>-->
             <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
           </configuration>
         </plugin>
@@ -120,7 +126,7 @@
             <configuration>
               <skip>true</skip>
               <rules>
-                <dependencyConvergence />
+                <dependencyConvergence/>
               </rules>
             </configuration>
           </execution>
@@ -330,13 +336,16 @@
                 <phase>package</phase>
                 <configuration>
                   <target>
-                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
-                    <property name="archive.includes" value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*" />
-                    <property name="tar.destfile" value="${final.name}-manual.tar" />
-                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip" includes="${archive.includes}" />
-                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
-                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
-                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}"/>
+                    <property name="archive.includes"
+                              value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*"/>
+                    <property name="tar.destfile" value="${final.name}-manual.tar"/>
+                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip"
+                         includes="${archive.includes}"/>
+                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}"
+                         includes="${archive.includes}"/>
+                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz"/>
+                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2"/>
                   </target>
                 </configuration>
               </execution>
@@ -354,12 +363,12 @@
         <!--        <version.io.quarkus.platform>3.9.2</version.io.quarkus.platform>-->
         <!-- https://search.maven.org/search?q=g:io.quarkus.platform -->
         <!-- https://github.com/quarkusio/quarkus/issues/43491 -->
-<!--        <version.io.quarkus.platform>3.15.0</version.io.quarkus.platform>-->
-<!--        <version.io.quarkus.platform>3.15.1</version.io.quarkus.platform>-->
+        <!--        <version.io.quarkus.platform>3.15.0</version.io.quarkus.platform>-->
+        <!--        <version.io.quarkus.platform>3.15.1</version.io.quarkus.platform>-->
         <!-- https://central.sonatype.com/artifact/io.quarkus.platform/quarkus-maven-plugin -->
         <!--version.io.quarkus.platform>3.17.4</version.io.quarkus.platform-->
         <!-- https://central.sonatype.com/artifact/io.quarkus.platform/quarkus-bom/versions -->
-<!--        <version.io.quarkus.platform>3.3.0</version.io.quarkus.platform>-->
+        <!--        <version.io.quarkus.platform>3.3.0</version.io.quarkus.platform>-->
         <version.io.quarkus.platform>3.29.2</version.io.quarkus.platform>
       </properties>
       <dependencyManagement>
