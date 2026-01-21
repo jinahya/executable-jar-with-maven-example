@@ -73,7 +73,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.7.1</version>
+          <version>3.8.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -83,7 +83,8 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.4.2</version>
+          <!-- https://central.sonatype.com/artifact/org.apache.maven.plugins/maven-jar-plugin/versions -->
+          <version>3.5.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -98,7 +99,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
-          <version>2.19.1</version>
+          <version>2.21.0</version>
           <configuration>
             <!--            <showVersionless>false</showVersionless>-->
             <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
@@ -108,7 +109,8 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <!-- https://central.sonatype.com/artifact/org.springframework.boot/spring-boot-maven-plugin/versions -->
-          <version>3.5.7</version>
+<!--          <version>3.5.7</version>-->
+          <version>4.0.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -126,7 +128,7 @@
             <configuration>
               <skip>true</skip>
               <rules>
-                <dependencyConvergence />
+                <dependencyConvergence/>
               </rules>
             </configuration>
           </execution>
@@ -336,13 +338,16 @@
                 <phase>package</phase>
                 <configuration>
                   <target>
-                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}" />
-                    <property name="archive.includes" value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*" />
-                    <property name="tar.destfile" value="${final.name}-manual.tar" />
-                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip" includes="${archive.includes}" />
-                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}" includes="${archive.includes}" />
-                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz" />
-                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2" />
+                    <property name="final.name" value="${project.build.directory}/${project.build.finalName}"/>
+                    <property name="archive.includes"
+                              value="${project.build.finalName}-manual.${project.packaging} ${project.build.finalName}-manual.lib/*"/>
+                    <property name="tar.destfile" value="${final.name}-manual.tar"/>
+                    <zip basedir="${project.build.directory}" destfile="${final.name}-manual.zip"
+                         includes="${archive.includes}"/>
+                    <tar basedir="${project.build.directory}" destfile="${tar.destfile}"
+                         includes="${archive.includes}"/>
+                    <gzip src="${tar.destfile}" destfile="${tar.destfile}.gz"/>
+                    <bzip2 src="${tar.destfile}" destfile="${tar.destfile}.bz2"/>
                   </target>
                 </configuration>
               </execution>
@@ -357,16 +362,9 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <!--        <version.io.quarkus.platform>3.9.2</version.io.quarkus.platform>-->
-        <!-- https://search.maven.org/search?q=g:io.quarkus.platform -->
-        <!-- https://github.com/quarkusio/quarkus/issues/43491 -->
-        <!--        <version.io.quarkus.platform>3.15.0</version.io.quarkus.platform>-->
-        <!--        <version.io.quarkus.platform>3.15.1</version.io.quarkus.platform>-->
-        <!-- https://central.sonatype.com/artifact/io.quarkus.platform/quarkus-maven-plugin -->
-        <!--version.io.quarkus.platform>3.17.4</version.io.quarkus.platform-->
         <!-- https://central.sonatype.com/artifact/io.quarkus.platform/quarkus-bom/versions -->
-        <!--        <version.io.quarkus.platform>3.3.0</version.io.quarkus.platform>-->
-        <version.io.quarkus.platform>3.29.2</version.io.quarkus.platform>
+        <!--        <version.io.quarkus.platform>3.29.2</version.io.quarkus.platform>-->
+        <version.io.quarkus.platform>3.30.6</version.io.quarkus.platform>
       </properties>
       <dependencyManagement>
         <dependencies>
