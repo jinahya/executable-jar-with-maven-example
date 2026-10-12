@@ -5,7 +5,7 @@
   <parent>
     <groupId>io.github.jinahya</groupId>
     <artifactId>jinahya-parent</artifactId>
-    <version>1.0.3</version>
+    <version>1.1.1</version>
   </parent>
 
   <groupId>com.github.jinahya</groupId>
@@ -45,7 +45,7 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <!-- https://central.sonatype.com/artifact/com.google.guava/guava/versions -->
-      <version>33.5.0-jre</version>
+      <version>33.7.2-jre</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -78,28 +78,28 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.9.0</version>
+          <version>3.11.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <!-- https://central.sonatype.com/artifact/org.apache.maven.plugins/maven-jar-plugin/versions -->
-          <version>3.5.0</version>
+          <version>3.5.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>3.6.1</version>
+          <version>3.6.2</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>tidy-maven-plugin</artifactId>
-          <version>1.4.0</version>
+          <version>1.4.1</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
-          <version>2.21.0</version>
+          <version>2.23.0</version>
           <configuration>
             <!--            <showVersionless>false</showVersionless>-->
             <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
@@ -110,7 +110,7 @@
           <artifactId>spring-boot-maven-plugin</artifactId>
           <!-- https://central.sonatype.com/artifact/org.springframework.boot/spring-boot-maven-plugin/versions -->
 <!--          <version>3.5.7</version>-->
-          <version>4.0.1</version>
+          <version>4.1.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -118,7 +118,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.6.2</version>
+        <version>3.6.3</version>
         <executions>
           <execution>
             <id>enforce-dependency-convergence</id>
@@ -133,14 +133,14 @@
             </configuration>
           </execution>
           <execution>
-            <id>enforce-require-java-version-[11,)</id>
+            <id>enforce-require-java-version-[17,)</id>
             <goals>
               <goal>enforce</goal>
             </goals>
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>[11,)</version>
+                  <version>[17,)</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
@@ -361,7 +361,7 @@
       <properties>
         <!-- https://central.sonatype.com/artifact/io.quarkus.platform/quarkus-bom/versions -->
         <!--        <version.io.quarkus.platform>3.29.2</version.io.quarkus.platform>-->
-        <version.io.quarkus.platform>3.30.6</version.io.quarkus.platform>
+        <version.io.quarkus.platform>3.40.1</version.io.quarkus.platform>
       </properties>
       <dependencyManagement>
         <dependencies>
