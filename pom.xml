@@ -31,8 +31,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>${project.build.sourceEncoding}
-    </project.reporting.outputEncoding>
+    <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
     <maven.compiler.testSource>${maven.compiler.source}</maven.compiler.testSource>
@@ -91,6 +90,12 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
           <version>3.6.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <!-- https://central.sonatype.com/artifact/org.codehaus.mojo/build-helper-maven-plugin/versions -->
+          <version>3.8.0</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -400,6 +405,89 @@
                 <goals>
                   <goal>build</goal>
                 </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <!-- native executables (app images, with bundled runtimes) of the executable jars above; mvn verify -->
+      <id>jpackage</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>jpackage-parse-version</id>
+                <goals>
+                  <goal>parse-version</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>antrun-jpackage</id>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <!-- after the package phase, when all the executable jars exist -->
+                <phase>verify</phase>
+                <configuration>
+                  <target xmlns:if="ant:if">
+                    <!-- jpackage accepts only period-separated integers, e.g. 1.0.2 for 1.0.2-SNAPSHOT -->
+                    <property name="jpackage.app.version" value="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}" />
+                    <property name="jpackage.input" value="${project.build.directory}/jpackage" />
+                    <macrodef name="jpackage">
+                      <attribute name="classifier" />
+                      <sequential>
+                        <local name="jar.available" />
+                        <local name="app.name" />
+                        <available property="jar.available" file="${project.build.directory}/${project.build.finalName}-@{classifier}.jar" />
+                        <property name="app.name" value="${project.artifactId}-${jpackage.app.version}-@{classifier}" />
+                        <sequential if:set="jar.available">
+                          <delete dir="${jpackage.input}/@{classifier}" />
+                          <delete dir="${project.build.directory}/${app.name}" />
+                          <delete dir="${project.build.directory}/${app.name}.app" />
+                          <copy todir="${jpackage.input}/@{classifier}">
+                            <fileset dir="${project.build.directory}" includes="${project.build.finalName}-@{classifier}.jar ${project.build.finalName}-@{classifier}.lib/**" />
+                          </copy>
+                          <!-- target/${app.name}.app on macOS, target/${app.name}/ on others -->
+                          <exec executable="${java.home}/bin/jpackage" failonerror="true">
+                            <arg value="--type" />
+                            <arg value="app-image" />
+                            <arg value="--name" />
+                            <arg value="${app.name}" />
+                            <arg value="--app-version" />
+                            <arg value="${jpackage.app.version}" />
+                            <arg value="--input" />
+                            <arg value="${jpackage.input}/@{classifier}" />
+                            <arg value="--main-jar" />
+                            <arg value="${project.build.finalName}-@{classifier}.jar" />
+                            <arg value="--dest" />
+                            <arg value="${project.build.directory}" />
+                          </exec>
+                        </sequential>
+                      </sequential>
+                    </macrodef>
+                    <!-- each one is skipped when its executable jar doesn't exist, e.g. with -P shade,jpackage -->
+                    <jpackage classifier="jar-with-dependencies" />
+                    <jpackage classifier="onejar" />
+                    <jpackage classifier="shaded" />
+                    <jpackage classifier="spring-boot" />
+                    <jpackage classifier="manual" />
+                    <jpackage classifier="quarkus" />
+                  </target>
+                </configuration>
               </execution>
             </executions>
           </plugin>

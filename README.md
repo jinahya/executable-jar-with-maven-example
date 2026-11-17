@@ -42,6 +42,8 @@ $ ls -1 target
 | `quarkus`               | `quarkus-maven-plugin`                                                         | `${finalName}-quarkus.jar`                                     |
 | `manual`                | `maven-dependency-plugin`, `maven-jar-plugin`, `maven-antrun-plugin`           | `${finalName}-manual.jar` with `${finalName}-manual.lib/`      |
 |                         |                                                                                | `${finalName}-manual.{zip,tar,tar.gz,tar.bz2}`                 |
+| `jpackage`              | `build-helper-maven-plugin`, `maven-antrun-plugin` (`jpackage`), in `verify`   | `${artifactId}-x.y.z-{classifier}.app` (macOS)                 |
+|                         |                                                                                | `${artifactId}-x.y.z-{classifier}/` (Linux, Windows)           |
 
 `${finalName}` is `executable-jar-with-maven-example-<version>`, e.g. `executable-jar-with-maven-example-1.0.2-SNAPSHOT`.
 
@@ -56,3 +58,25 @@ interface com.google.inject.Injector
 ```
 
 The `-manual.jar` needs its `-manual.lib/` directory next to it, which is what the `-manual.{zip,tar,...}` archives contain.
+
+## Native executables (`jpackage`)
+
+The `jpackage` profile runs in the `verify` phase, after all the jars are packaged.
+
+```
+$ mvn clean verify
+```
+
+For each executable jar above, it uses the JDK's `jpackage` to create an app image: a native launcher with a bundled Java runtime, for the OS the build runs on.
+No Java needs to be installed to run it.
+
+* `x.y.z` is the version without `-SNAPSHOT`, because `jpackage` accepts only integers separated by periods.
+* `{classifier}` is `jar-with-dependencies`, `onejar`, `shaded`, `spring-boot`, `manual`, or `quarkus`. An app image is skipped when its jar wasn't built, e.g. with `-P shade,jpackage`.
+
+```
+$ target/executable-jar-with-maven-example-1.0.2-shaded.app/Contents/MacOS/executable-jar-with-maven-example-1.0.2-shaded
+class com.google.common.io.BaseEncoding
+interface com.google.inject.Injector
+```
+
+On Linux and Windows, the launcher is `bin/<name>` and `<name>.exe` in the `${artifactId}-x.y.z-{classifier}/` directory.
