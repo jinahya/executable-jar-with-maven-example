@@ -32,10 +32,12 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+    <maven.compiler.release>${maven.compiler.target}</maven.compiler.release>
     <maven.compiler.testSource>${maven.compiler.source}</maven.compiler.testSource>
     <maven.compiler.testTarget>${maven.compiler.testSource}</maven.compiler.testTarget>
+    <maven.compiler.testRelease>${maven.compiler.testTarget}</maven.compiler.testRelease>
     <mainClass>com.github.jinahya.example.Main</mainClass>
   </properties>
 
@@ -453,7 +455,7 @@
                         <local name="jar.available" />
                         <local name="app.name" />
                         <available property="jar.available" file="${project.build.directory}/${project.build.finalName}-@{classifier}.jar" />
-                        <property name="app.name" value="${project.artifactId}-${jpackage.app.version}-@{classifier}" />
+                        <property name="app.name" value="${project.artifactId}-@{classifier}" />
                         <sequential if:set="jar.available">
                           <delete dir="${jpackage.input}/@{classifier}" />
                           <delete dir="${project.build.directory}/${app.name}" />
