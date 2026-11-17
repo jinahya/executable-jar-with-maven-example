@@ -79,4 +79,4 @@ class com.google.common.io.BaseEncoding
 interface com.google.inject.Injector
 ```
 
-On Linux and Windows, the launcher is `bin/<name>` and `<name>.exe` in the `${artifactId}-{classifier}/` directory.
+On Linux and Windows, the launcher is `bin/<name>` and `<name>.exe` in the `${artifactId}-{classifier}/` directory. The `.exe` is built with `--win-console`, so its output shows in the console.

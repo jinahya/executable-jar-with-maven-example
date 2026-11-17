@@ -449,6 +449,9 @@
                     <!-- jpackage accepts only period-separated integers, e.g. 1.0.2 for 1.0.2-SNAPSHOT -->
                     <property name="jpackage.app.version" value="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}" />
                     <property name="jpackage.input" value="${project.build.directory}/jpackage" />
+                    <condition property="jpackage.windows">
+                      <os family="windows" />
+                    </condition>
                     <macrodef name="jpackage">
                       <attribute name="classifier" />
                       <sequential>
@@ -477,6 +480,8 @@
                             <arg value="${project.build.finalName}-@{classifier}.jar" />
                             <arg value="--dest" />
                             <arg value="${project.build.directory}" />
+                            <!-- without it, the .exe has no console, so its output isn't shown -->
+                            <arg value="--win-console" if:set="jpackage.windows" />
                           </exec>
                         </sequential>
                       </sequential>
